@@ -1,19 +1,18 @@
 package co.edu.uptc.services;
 
-import co.edu.uptc.controller.PetController;
-import co.edu.uptc.model.Pet;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import co.edu.uptc.model.*;
 
-@Service
-public class PetService {
-    private final PetController petController;
-
-    public PetService(PetController petController) {
-        this.petController = petController;
-    }
-
-    public ResponseEntity<String> updatePet(Long id, Pet updatedPet) {
-        return petController.updatePet(id, updatedPet);
-    }
+public interface PetService {
+	public Iterable<Pet> findAll();
+	public Optional<Pet> findById(Long id);
+	public Page<Pet>findAll(Pageable pageable);
+	public Pet save(Pet pet);
+	public void deleteById(Long id);
+	public List<Pet> getPets();
+	public Pet updatePet(Pet request, long id);
+	boolean deletePet(long id);
 }
